@@ -1,0 +1,36 @@
+services:
+  pyrosense-app:
+    build: .
+    ports:
+      - "8501:8501"
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models/weights:/app/models/weights
+      - ./mlruns:/app/mlruns
+    env_file:
+      - .env
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlruns
+    command: >
+      mlflow ui --backend-store-uri /mlruns --host 0.0.0.0 --port 5000
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: pyrosense
+      POSTGRES_USER: pyrosense
+      POSTGRES_PASSWORD: pyrosense
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+

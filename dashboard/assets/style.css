@@ -1,0 +1,195 @@
+/* === PyroSense AI — Mission Control Theme === */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0D0F14;
+  --bg-secondary: #141720;
+  --bg-card: #1A1D26;
+  --bg-card-hover: #1F2333;
+  --border-dim: rgba(255,255,255,0.06);
+  --border-accent: rgba(255,69,0,0.4);
+  --fire-primary: #FF4500;
+  --fire-glow: rgba(255,69,0,0.15);
+  --smoke-primary: #8B9BB4;
+  --safe-primary: #00D46A;
+  --info-primary: #4A9EFF;
+  --warning-primary: #FFB800;
+  --text-primary: #E8EAF0;
+  --text-secondary: #8B92A5;
+  --text-muted: #555C70;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* Global overrides */
+.stApp { background: var(--bg-primary) !important; font-family: var(--font-sans); }
+.stApp > header { background: var(--bg-secondary) !important; border-bottom: 1px solid var(--border-dim); }
+[data-testid="stSidebar"] { background: var(--bg-secondary) !important; border-right: 1px solid var(--border-dim); }
+[data-testid="stSidebar"] * { color: var(--text-secondary) !important; }
+[data-testid="stSidebar"] .stRadio label { font-family: var(--font-mono); font-size: 12px; }
+
+/* Metric cards */
+[data-testid="metric-container"] {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+[data-testid="metric-container"]:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255,69,0,0.3);
+}
+[data-testid="metric-container"] [data-testid="stMetricLabel"] {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+[data-testid="metric-container"] [data-testid="stMetricValue"] {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary) !important;
+}
+
+/* Buttons */
+.stButton > button {
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.stButton > button:hover {
+  border-color: var(--fire-primary);
+  color: var(--fire-primary);
+  background: var(--fire-glow);
+}
+
+/* Emergency alert button */
+.alert-button > button {
+  background: rgba(255,69,0,0.1);
+  border: 1px solid var(--fire-primary);
+  color: var(--fire-primary);
+  font-weight: 600;
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(255,69,0,0); }
+}
+
+/* Status indicators */
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+.status-dot.active { background: var(--safe-primary); animation: blink 1.5s infinite; }
+.status-dot.fire { background: var(--fire-primary); animation: blink 0.5s infinite; }
+.status-dot.offline { background: var(--text-muted); }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Custom card component */
+.pyro-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.pyro-card.alert {
+  border-color: var(--fire-primary);
+  background: linear-gradient(135deg, var(--bg-card), rgba(255,69,0,0.05));
+}
+
+/* Detection badge */
+.detection-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.detection-badge.fire { background: rgba(255,69,0,0.15); color: #FF6B35; border: 1px solid rgba(255,69,0,0.3); }
+.detection-badge.smoke { background: rgba(139,155,180,0.15); color: #8B9BB4; border: 1px solid rgba(139,155,180,0.3); }
+.detection-badge.safe { background: rgba(0,212,106,0.15); color: #00D46A; border: 1px solid rgba(0,212,106,0.3); }
+
+/* Risk score bar */
+.risk-bar { height: 4px; border-radius: 2px; background: var(--border-dim); overflow: hidden; }
+.risk-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+.risk-fill.low { background: var(--safe-primary); }
+.risk-fill.medium { background: var(--warning-primary); }
+.risk-fill.high { background: var(--fire-primary); }
+.risk-fill.critical { background: #FF0000; animation: pulse-border 0.5s infinite; }
+
+/* Dataframe overrides */
+[data-testid="stDataFrame"] { border-radius: 12px; overflow: hidden; }
+.dvn-scroller { background: var(--bg-card) !important; }
+
+/* Selectbox / dropdowns */
+.stSelectbox select, .stTextInput input {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-dim) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+/* Progress bars */
+.stProgress > div > div > div { background: var(--fire-primary) !important; border-radius: 4px; }
+
+/* Tab styling */
+.stTabs [data-baseweb="tab-list"] {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-dim);
+}
+.stTabs [data-baseweb="tab"] {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.stTabs [aria-selected="true"] {
+  color: var(--fire-primary) !important;
+  border-bottom: 2px solid var(--fire-primary) !important;
+}
+
+/* Sidebar navigation labels */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.nav-item:hover { background: var(--bg-card); color: var(--text-primary); }
+.nav-item.active { background: var(--fire-glow); color: var(--fire-primary); border-left: 2px solid var(--fire-primary); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-dim); border-radius: 2px; }
+
