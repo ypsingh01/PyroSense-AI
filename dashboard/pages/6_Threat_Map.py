@@ -23,12 +23,12 @@ from database.session import SessionLocal
 
 PLOTLY_DARK_TEMPLATE = {
     "layout": {
-        "paper_bgcolor": "#0D0F14",
-        "plot_bgcolor": "#141720",
-        "font": {"family": "JetBrains Mono", "color": "#8B92A5", "size": 11},
-        "xaxis": {"gridcolor": "rgba(255,255,255,0.05)", "linecolor": "rgba(255,255,255,0.1)"},
-        "yaxis": {"gridcolor": "rgba(255,255,255,0.05)", "linecolor": "rgba(255,255,255,0.1)"},
-        "colorway": ["#FF4500", "#4A9EFF", "#00D46A", "#FFB800"],
+        "paper_bgcolor": "#F7F8FA",
+        "plot_bgcolor": "#FFFFFF",
+        "font": {"family": "JetBrains Mono", "color": "#4B5563", "size": 11},
+        "xaxis": {"gridcolor": "rgba(0,0,0,0.06)", "linecolor": "rgba(0,0,0,0.08)"},
+        "yaxis": {"gridcolor": "rgba(0,0,0,0.06)", "linecolor": "rgba(0,0,0,0.08)"},
+        "colorway": ["#E53E3E", "#3B82F6", "#10B981", "#F59E0B"],
     }
 }
 
@@ -99,11 +99,11 @@ setInterval(() => {
 
     st.markdown(
         """
-    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#E8EAF0; font-weight:700;">
+    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
         THREAT MAP
       </div>
-      <div style="font-family:monospace; font-size:11px; color:#555C70; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
+      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
         Zone-based risk overview (auto-refresh 10s)
       </div>
     </div>
@@ -131,20 +131,20 @@ setInterval(() => {
     for i, z in enumerate(zones[:16]):
         s = _zone_status(z, dets)
         statuses.append(s)
-        border = "#00D46A"
+        border = "#10B981"
         if s["status"] == "SMOKE":
-            border = "#FFB800"
+            border = "#F59E0B"
         if s["status"] == "FIRE":
-            border = "#FF4500"
+            border = "#E53E3E"
         with grid_cols[i % 4]:
             st.markdown(
                 f"""
-            <div class="pyro-card" style="border:1px solid rgba(255,255,255,0.06); border-left:3px solid {border};">
+            <div class="pyro-card" style="border:1px solid rgba(0,0,0,0.06); border-left:3px solid {border};">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="font-family:monospace; font-size:12px; color:#E8EAF0; font-weight:700;">{z.get('name')}</div>
-                <div style="font-family:monospace; font-size:10px; color:#555C70;">{z.get('camera_id')}</div>
+                <div style="font-family:monospace; font-size:12px; color:#111827; font-weight:700;">{z.get('name')}</div>
+                <div style="font-family:monospace; font-size:10px; color:#9CA3AF;">{z.get('camera_id')}</div>
               </div>
-              <div style="margin-top:10px; font-family:monospace; font-size:10px; color:#8B92A5;">
+              <div style="margin-top:10px; font-family:monospace; font-size:10px; color:#4B5563;">
                 STATUS: <b>{s['status']}</b><br/>
                 RISK: <b>{float(s['risk']):.0f}</b><br/>
                 LAST: {str(s['time'])[-19:]}
@@ -164,10 +164,10 @@ setInterval(() => {
         st.markdown(
             f"""
         <div class="pyro-card alert">
-          <div style="font-family:monospace; font-size:12px; color:#E8EAF0; font-weight:800;">
+          <div style="font-family:monospace; font-size:12px; color:#111827; font-weight:800;">
             {z.get('name')} — DETAIL
           </div>
-          <div style="font-family:monospace; font-size:11px; color:#8B92A5; margin-top:10px; line-height:1.7;">
+          <div style="font-family:monospace; font-size:11px; color:#4B5563; margin-top:10px; line-height:1.7;">
             Camera: {z.get('camera_id')}<br/>
             Source: {z.get('source')}<br/>
             Status: {s.get('status')}<br/>
@@ -185,7 +185,7 @@ setInterval(() => {
     matrix = np.zeros((4, 4), dtype=float)
     for i, s in enumerate(statuses[:16]):
         matrix[i // 4, i % 4] = float(s.get("risk", 0.0))
-    fig = px.imshow(matrix, text_auto=True, color_continuous_scale=["#141720", "#FF4500"], title="Zone risk matrix (current)")
+    fig = px.imshow(matrix, text_auto=True, color_continuous_scale=["#FFFFFF", "#E53E3E"], title="Zone risk matrix (current)")
     fig.update_layout(template=PLOTLY_DARK_TEMPLATE)
     st.plotly_chart(fig, use_container_width=True)
 

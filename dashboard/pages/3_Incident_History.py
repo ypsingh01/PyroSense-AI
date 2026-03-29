@@ -23,12 +23,12 @@ from database.session import SessionLocal
 
 PLOTLY_DARK_TEMPLATE = {
     "layout": {
-        "paper_bgcolor": "#0D0F14",
-        "plot_bgcolor": "#141720",
-        "font": {"family": "JetBrains Mono", "color": "#8B92A5", "size": 11},
-        "xaxis": {"gridcolor": "rgba(255,255,255,0.05)", "linecolor": "rgba(255,255,255,0.1)"},
-        "yaxis": {"gridcolor": "rgba(255,255,255,0.05)", "linecolor": "rgba(255,255,255,0.1)"},
-        "colorway": ["#FF4500", "#4A9EFF", "#00D46A", "#FFB800"],
+        "paper_bgcolor": "#F7F8FA",
+        "plot_bgcolor": "#FFFFFF",
+        "font": {"family": "JetBrains Mono", "color": "#4B5563", "size": 11},
+        "xaxis": {"gridcolor": "rgba(0,0,0,0.06)", "linecolor": "rgba(0,0,0,0.08)"},
+        "yaxis": {"gridcolor": "rgba(0,0,0,0.06)", "linecolor": "rgba(0,0,0,0.08)"},
+        "colorway": ["#E53E3E", "#3B82F6", "#10B981", "#F59E0B"],
     }
 }
 
@@ -48,11 +48,11 @@ def main() -> None:
 
     st.markdown(
         """
-    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#E8EAF0; font-weight:700;">
+    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
         INCIDENT HISTORY
       </div>
-      <div style="font-family:monospace; font-size:11px; color:#555C70; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
+      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
         Timeline, risk index, and operational reporting
       </div>
     </div>
@@ -148,11 +148,11 @@ def main() -> None:
             title={"text": "Today's risk index (0-100)"},
             gauge={
                 "axis": {"range": [0, 100]},
-                "bar": {"color": "#FF4500"},
+                "bar": {"color": "#E53E3E"},
                 "steps": [
-                    {"range": [0, 40], "color": "rgba(0,212,106,0.25)"},
+                    {"range": [0, 40], "color": "rgba(16,185,129,0.25)"},
                     {"range": [40, 70], "color": "rgba(255,184,0,0.25)"},
-                    {"range": [70, 100], "color": "rgba(255,69,0,0.20)"},
+                    {"range": [70, 100], "color": "rgba(229,62,62,0.20)"},
                 ],
             },
         )
@@ -201,8 +201,8 @@ def main() -> None:
                 st.markdown(
                     f"""
                 <div class="pyro-card alert">
-                  <div style="font-family:monospace; font-size:12px; color:#E8EAF0; font-weight:700;">Incident Report</div>
-                  <div style="font-family:monospace; font-size:11px; color:#8B92A5; margin-top:8px; line-height:1.7;">
+                  <div style="font-family:monospace; font-size:12px; color:#111827; font-weight:700;">Incident Report</div>
+                  <div style="font-family:monospace; font-size:11px; color:#4B5563; margin-top:8px; line-height:1.7;">
                     ID: {r['ID']}<br/>
                     Time: {r['Time']}<br/>
                     Type: {r['Type']} ({r['Confidence']*100:.0f}%)<br/>

@@ -20,13 +20,13 @@ def render_detection_card(detection: dict, show_heatmap_btn: bool = True):
     if risk >= 90:
         risk_label, risk_color = "CRITICAL", "#FF0000"
     elif risk >= 70:
-        risk_label, risk_color = "HIGH", "#FF4500"
+        risk_label, risk_color = "HIGH", "#E53E3E"
     elif risk >= 40:
-        risk_label, risk_color = "MEDIUM", "#FFB800"
+        risk_label, risk_color = "MEDIUM", "#F59E0B"
     else:
-        risk_label, risk_color = "LOW", "#00D46A"
+        risk_label, risk_color = "LOW", "#10B981"
 
-    badge_color = "#FF4500" if cls == "fire" else "#8B9BB4"
+    badge_color = "#E53E3E" if cls == "fire" else "#4B5563"
 
     st.markdown(
         f"""
@@ -34,7 +34,7 @@ def render_detection_card(detection: dict, show_heatmap_btn: bool = True):
       <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:12px;">
           <span class="detection-badge {cls}">{cls.upper()}</span>
-          <span style="font-family:monospace; font-size:13px; color:#E8EAF0; font-weight:600;">
+          <span style="font-family:monospace; font-size:13px; color:#111827; font-weight:600;">
             {conf*100:.1f}% CONFIDENCE
           </span>
         </div>
@@ -42,7 +42,7 @@ def render_detection_card(detection: dict, show_heatmap_btn: bool = True):
           <div style="font-family:monospace; font-size:18px; color:{risk_color}; font-weight:700;">
             {risk_label}
           </div>
-          <div style="font-family:monospace; font-size:10px; color:#555C70;">
+          <div style="font-family:monospace; font-size:10px; color:#9CA3AF;">
             RISK SCORE: {int(risk)}/100
           </div>
         </div>
@@ -53,9 +53,9 @@ def render_detection_card(detection: dict, show_heatmap_btn: bool = True):
              style="width:{min(100.0, max(0.0, risk))}%;"></div>
       </div>
 
-      {f'<div style="font-family:monospace; font-size:12px; color:#8B92A5; line-height:1.6; margin-bottom:12px; padding:12px; background:rgba(255,255,255,0.03); border-radius:8px; border-left:3px solid {badge_color};">{detection.get("llm_summary", "")}</div>' if detection.get('llm_summary') else ''}
+      {f'<div style="font-family:monospace; font-size:12px; color:#4B5563; line-height:1.6; margin-bottom:12px; padding:12px; background:rgba(0,0,0,0.06); border-radius:8px; border-left:3px solid {badge_color};">{detection.get("llm_summary", "")}</div>' if detection.get('llm_summary') else ''}
 
-      <div style="font-family:monospace; font-size:10px; color:#555C70;">
+      <div style="font-family:monospace; font-size:10px; color:#9CA3AF;">
         {detection.get('timestamp', '')} | BBox: {detection.get('bbox', 'N/A')}
       </div>
     </div>

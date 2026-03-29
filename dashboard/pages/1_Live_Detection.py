@@ -31,14 +31,14 @@ def _load_css() -> None:
 
 def _risk_label(risk: float) -> Tuple[str, str]:
     if risk >= 90:
-        return "CRITICAL", "#FF0000"
+        return "CRITICAL", "#DC2626"
     if risk >= 70:
-        return "HIGH", "#FF4500"
+        return "HIGH", "#E53E3E"
     if risk >= 40:
-        return "MEDIUM", "#FFB800"
+        return "MEDIUM", "#F59E0B"
     if risk >= 15:
-        return "LOW", "#A6FF00"
-    return "SAFE", "#00D46A"
+        return "LOW", "#10B981"
+    return "SAFE", "#10B981"
 
 
 def _hud_overlay(frame_bgr: np.ndarray, fps: float, risk_score: float) -> np.ndarray:
@@ -97,22 +97,22 @@ def main() -> None:
     st.markdown(
         """
     <div style="display:flex; align-items:center; justify-content:space-between; 
-                padding: 0 0 24px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                padding: 0 0 24px; border-bottom: 1px solid #E5E7EB;">
       <div>
         <h1 style="font-family:'JetBrains Mono',monospace; font-size:22px; 
-                   color:#E8EAF0; margin:0; font-weight:600;">
+                   color:#111827; margin:0; font-weight:600;">
           LIVE DETECTION FEED
         </h1>
-        <p style="font-family:monospace; font-size:11px; color:#555C70; 
+        <p style="font-family:monospace; font-size:11px; color:#9CA3AF; 
                   margin:4px 0 0; text-transform:uppercase; letter-spacing:0.1em;">
           Real-time fire & smoke monitoring
         </p>
       </div>
       <div id="live-indicator" style="display:flex; align-items:center; gap:8px;
-           padding: 8px 16px; background:rgba(0,212,106,0.1); 
-           border:1px solid rgba(0,212,106,0.3); border-radius:20px;">
+           padding: 8px 16px; background:rgba(16,185,129,0.1); 
+           border:1px solid rgba(16,185,129,0.3); border-radius:20px;">
         <span class="status-dot active"></span>
-        <span style="font-family:monospace; font-size:12px; color:#00D46A; 
+        <span style="font-family:monospace; font-size:12px; color:#10B981; 
                      font-weight:600; text-transform:uppercase;">MONITORING</span>
       </div>
     </div>
@@ -206,13 +206,13 @@ def main() -> None:
         risk_card.markdown(
             f"""
         <div class="pyro-card {'alert' if label in ['HIGH','CRITICAL'] else ''}">
-          <div style="font-family:monospace; font-size:10px; color:#555C70; text-transform:uppercase; letter-spacing:0.12em;">
+          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em;">
             RISK LEVEL
           </div>
           <div style="font-family:monospace; font-size:28px; color:{color}; font-weight:800; margin-top:6px;">
             {label}
           </div>
-          <div style="font-family:monospace; font-size:10px; color:#555C70; margin-top:2px;">
+          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; margin-top:2px;">
             SCORE: {int(risk_score)}/100
           </div>
           <div class="risk-bar" style="margin-top:10px;">
@@ -236,18 +236,18 @@ def main() -> None:
         log_html = ""
         for r in rows:
             cls = str(r.get("class_name", "none")).lower()
-            bg = "rgba(255,69,0,0.10)" if "fire" in cls else "rgba(139,155,180,0.08)"
-            border = "rgba(255,69,0,0.25)" if "fire" in cls else "rgba(255,255,255,0.06)"
+            bg = "rgba(229,62,62,0.06)" if "fire" in cls else "rgba(75,85,99,0.06)"
+            border = "rgba(229,62,62,0.2)" if "fire" in cls else "#E5E7EB"
             badge_cls = "fire" if "fire" in cls else ("smoke" if "smoke" in cls else "safe")
             log_html += f"""
             <div style="display:flex; justify-content:space-between; align-items:center;
                         padding:10px 12px; margin-bottom:8px; background:{bg};
                         border:1px solid {border}; border-radius:10px;">
               <div style="display:flex; align-items:center; gap:10px;">
-                <span style="font-family:monospace; font-size:10px; color:#555C70;">{r.get('timestamp','').replace('T',' ')[5:19]}</span>
+                <span style="font-family:monospace; font-size:10px; color:#9CA3AF;">{r.get('timestamp','').replace('T',' ')[5:19]}</span>
                 <span class="detection-badge {badge_cls}">{str(r.get('class_name','')).upper()}</span>
               </div>
-              <div style="font-family:monospace; font-size:11px; color:#8B92A5;">
+              <div style="font-family:monospace; font-size:11px; color:#4B5563;">
                 {float(r.get('confidence',0))*100:.0f}% • RISK {float(r.get('risk_score',0)):.0f}
               </div>
             </div>
@@ -256,10 +256,10 @@ def main() -> None:
         log_box.markdown(
             f"""
         <div class="pyro-card">
-          <div style="font-family:monospace; font-size:10px; color:#555C70; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">
+          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">
             DETECTION LOG (LAST 10)
           </div>
-          <div style="max-height:320px; overflow:auto;">{log_html or '<div style="font-family:monospace; color:#555C70; font-size:11px;">No detections yet.</div>'}</div>
+          <div style="max-height:320px; overflow:auto;">{log_html or '<div style="font-family:monospace; color:#9CA3AF; font-size:11px;">No detections yet.</div>'}</div>
         </div>
         """,
             unsafe_allow_html=True,
@@ -269,10 +269,10 @@ def main() -> None:
         alerts_box.markdown(
             f"""
         <div class="pyro-card">
-          <div style="font-family:monospace; font-size:10px; color:#555C70; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">
+          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">
             ACTIVE ALERTS
           </div>
-          <div style="font-family:monospace; font-size:11px; color:#8B92A5; line-height:1.7;">
+          <div style="font-family:monospace; font-size:11px; color:#4B5563; line-height:1.7;">
             LAST: {la.get('sent_at','-')}<br/>
             CHANNEL: {la.get('channel','-')}<br/>
             STATUS: {la.get('status','-')}
@@ -515,21 +515,21 @@ def main() -> None:
                     if fire_conf > 0.7:
                         alert_banner.markdown(
                             f"""
-                        <div style="background:rgba(255,69,0,0.15); border:2px solid #FF4500;
+                        <div style="background:#FEF2F2; border:2px solid #E53E3E;
                                     border-radius:12px; padding:16px 24px; margin:16px 0;
                                     animation: pulse-border 1s infinite;
                                     display:flex; align-items:center; justify-content:space-between;">
                           <div style="display:flex; align-items:center; gap:12px;">
                             <span style="font-size:24px;">🔥</span>
                             <div>
-                              <div style="font-family:monospace; font-size:16px; color:#FF4500; 
+                              <div style="font-family:monospace; font-size:16px; color:#E53E3E; 
                                           font-weight:700; text-transform:uppercase;">FIRE DETECTED</div>
-                              <div style="font-family:monospace; font-size:12px; color:#8B92A5;">
+                              <div style="font-family:monospace; font-size:12px; color:#4B5563;">
                                 Confidence: {fire_conf*100:.0f}% — Zone: local — {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
                               </div>
                             </div>
                           </div>
-                          <div style="font-family:monospace; font-size:11px; color:#00D46A;">
+                          <div style="font-family:monospace; font-size:11px; color:#10B981;">
                             ✓ ALERTS DISPATCHED
                           </div>
                         </div>

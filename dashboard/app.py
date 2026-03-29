@@ -80,35 +80,61 @@ def _get_today_stats() -> Dict[str, int]:
         return {"total": 0, "fire": 0, "smoke": 0, "alerts_sent": 0}
 
 
+# Top Navigation Bar
+st.markdown(
+    """
+<div class="top-navbar">
+  <div class="brand">
+    <div class="brand-icon">&#x1F6E1;</div>
+    <div>
+      <div class="brand-text">IntelliGuard</div>
+      <div class="brand-sub">AI Fire &amp; Smoke Detection System</div>
+    </div>
+  </div>
+  <div class="nav-status">
+    <div class="status-pill">
+      <span class="status-dot active"></span>
+      System Online
+    </div>
+    <div class="nav-info">YOLOv8s + EfficientNetV2</div>
+  </div>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
 # Sidebar — brand + navigation
 with st.sidebar:
     st.markdown(
         """
-    <div style="padding: 20px 0 30px; border-bottom: 1px solid rgba(255,255,255,0.06);">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; 
-                  font-weight: 700; color: #FF4500; letter-spacing: -0.02em;">
-        PYROSENSE
-      </div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px;
-                  color: #555C70; text-transform: uppercase; letter-spacing: 0.2em;
-                  margin-top: 2px;">
-        AI FIRE DETECTION SYSTEM
+    <div style="padding: 20px 0 24px; border-bottom: 1px solid #E5E7EB;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:32px; height:32px; background:linear-gradient(135deg,#E53E3E,#F97316);
+                    border-radius:8px; display:flex; align-items:center; justify-content:center;
+                    font-size:16px; box-shadow:0 2px 6px rgba(229,62,62,0.25);">&#x1F6E1;</div>
+        <div>
+          <div style="font-family:'Inter',sans-serif; font-size:16px; font-weight:700; color:#111827;">
+            IntelliGuard
+          </div>
+          <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em;">
+            Fire Detection
+          </div>
+        </div>
       </div>
     </div>
     """,
         unsafe_allow_html=True,
     )
 
-    # System status indicator
     st.markdown(
         """
-    <div style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
-      <div style="display: flex; align-items: center; gap: 8px; 
-                  font-family: monospace; font-size: 11px; color: #00D46A;">
+    <div style="padding: 14px 0; border-bottom: 1px solid #E5E7EB;">
+      <div style="display:flex; align-items:center; gap:8px;
+                  font-family:'Inter',sans-serif; font-size:12px; color:#10B981; font-weight:500;">
         <span class="status-dot active"></span>
-        SYSTEM OPERATIONAL
+        System Operational
       </div>
-      <div style="font-family: monospace; font-size: 10px; color: #555C70; margin-top: 6px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#9CA3AF; margin-top:4px;">
         MODEL: YOLOv8s-FireSmoke v1.2
       </div>
     </div>
@@ -124,25 +150,25 @@ with st.sidebar:
 
     st.markdown(
         f"""
-    <div style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
-      <div style="font-family: monospace; font-size: 10px; color: #555C70;
-                  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">
-        TODAY'S SUMMARY
+    <div style="padding: 14px 0; border-bottom: 1px solid #E5E7EB;">
+      <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF;
+                  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; font-weight:600;">
+        Today's Summary
       </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div style="text-align:center; padding: 8px; background: rgba(255,69,0,0.08); 
-                    border-radius: 8px; border: 1px solid rgba(255,69,0,0.2);">
-          <div style="font-family: monospace; font-size: 18px; color: #FF4500; font-weight: 700;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div style="text-align:center; padding:10px 8px; background:#FEF2F2;
+                    border-radius:10px; border:1px solid #FECACA;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:20px; color:#DC2626; font-weight:700;">
             {stats['fire']}
           </div>
-          <div style="font-family: monospace; font-size: 9px; color: #555C70;">FIRE</div>
+          <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF; font-weight:500;">FIRE</div>
         </div>
-        <div style="text-align:center; padding: 8px; background: rgba(139,155,180,0.08); 
-                    border-radius: 8px; border: 1px solid rgba(139,155,180,0.2);">
-          <div style="font-family: monospace; font-size: 18px; color: #8B9BB4; font-weight: 700;">
+        <div style="text-align:center; padding:10px 8px; background:#F3F4F6;
+                    border-radius:10px; border:1px solid #E5E7EB;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:20px; color:#6B7280; font-weight:700;">
             {stats['smoke']}
           </div>
-          <div style="font-family: monospace; font-size: 9px; color: #555C70;">SMOKE</div>
+          <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF; font-weight:500;">SMOKE</div>
         </div>
       </div>
     </div>
@@ -159,40 +185,27 @@ with st.sidebar:
     }
     channel_html = ""
     for name, enabled in channels.items():
-        color = "#00D46A" if enabled else "#555C70"
+        color = "#10B981" if enabled else "#D1D5DB"
+        bg = "#D1FAE5" if enabled else "#F3F4F6"
         label = "ON" if enabled else "OFF"
         channel_html += f"""
         <div style="display:flex; justify-content:space-between; align-items:center;
-                    padding: 4px 0; font-family: monospace; font-size: 11px;">
-          <span style="color: #8B92A5;">{name}</span>
-          <span style="color: {color}; font-size: 10px;">{label}</span>
+                    padding:6px 0; font-family:'Inter',sans-serif; font-size:12px;">
+          <span style="color:#4B5563;">{name}</span>
+          <span style="background:{bg}; color:{color}; font-size:10px; font-weight:600;
+                       padding:2px 8px; border-radius:10px;">{label}</span>
         </div>
       """
     st.markdown(
         f"""
-    <div style="padding: 16px 0;">
-      <div style="font-family: monospace; font-size: 10px; color: #555C70;
-                  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">
-        ALERT CHANNELS
+    <div style="padding: 14px 0;">
+      <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF;
+                  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; font-weight:600;">
+        Alert Channels
       </div>
       {channel_html}
     </div>
     """,
         unsafe_allow_html=True,
     )
-
-
-st.markdown(
-    """
-<div style="padding: 18px 0 8px;">
-  <div style="font-family:'JetBrains Mono',monospace; font-size: 18px; color:#E8EAF0; font-weight:700;">
-    PYROSENSE AI
-  </div>
-  <div style="font-family: monospace; font-size: 11px; color:#555C70; text-transform:uppercase; letter-spacing:0.1em;">
-    Real-time fire & smoke detection command center
-  </div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
 

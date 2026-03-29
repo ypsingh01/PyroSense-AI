@@ -27,12 +27,12 @@ from utils.image_utils import pil_to_bgr
 
 PLOTLY_DARK_TEMPLATE = {
     "layout": {
-        "paper_bgcolor": "#0D0F14",
-        "plot_bgcolor": "#141720",
-        "font": {"family": "JetBrains Mono", "color": "#8B92A5", "size": 11},
-        "xaxis": {"gridcolor": "rgba(255,255,255,0.05)", "linecolor": "rgba(255,255,255,0.1)"},
-        "yaxis": {"gridcolor": "rgba(255,255,255,0.05)", "linecolor": "rgba(255,255,255,0.1)"},
-        "colorway": ["#FF4500", "#4A9EFF", "#00D46A", "#FFB800"],
+        "paper_bgcolor": "#F7F8FA",
+        "plot_bgcolor": "#FFFFFF",
+        "font": {"family": "JetBrains Mono", "color": "#4B5563", "size": 11},
+        "xaxis": {"gridcolor": "rgba(0,0,0,0.06)", "linecolor": "rgba(0,0,0,0.08)"},
+        "yaxis": {"gridcolor": "rgba(0,0,0,0.06)", "linecolor": "rgba(0,0,0,0.08)"},
+        "colorway": ["#E53E3E", "#3B82F6", "#10B981", "#F59E0B"],
     }
 }
 
@@ -52,11 +52,11 @@ def main() -> None:
 
     st.markdown(
         """
-    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#E8EAF0; font-weight:700;">
+    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
         MODEL INSIGHTS
       </div>
-      <div style="font-family:monospace; font-size:11px; color:#555C70; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
+      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
         Training, explainability, and performance
       </div>
     </div>
@@ -204,7 +204,7 @@ def _confusion_matrix_plot():
         text_auto=True,
         x=["Pred Fire", "Pred Smoke"],
         y=["True Fire", "True Smoke"],
-        color_continuous_scale=["#141720", "#FF4500"],
+        color_continuous_scale=["#FFFFFF", "#E53E3E"],
         title="Confusion matrix (classifier)",
     )
     fig.update_layout(template=PLOTLY_DARK_TEMPLATE)

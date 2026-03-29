@@ -78,11 +78,11 @@ def main() -> None:
 
     st.markdown(
         """
-    <div style="padding: 0 0 24px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#E8EAF0; font-weight:700;">
+    <div style="padding: 0 0 24px; border-bottom: 1px solid #E5E7EB; margin-bottom: 18px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
         UPLOAD ANALYSIS
       </div>
-      <div style="font-family:monospace; font-size:11px; color:#555C70; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
+      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
         Analyze images and videos for fire and smoke
       </div>
     </div>
@@ -92,8 +92,8 @@ def main() -> None:
 
     st.markdown(
         """
-    <div class="pyro-card" style="border:1px dashed rgba(255,69,0,0.35); background: rgba(255,69,0,0.03);">
-      <div style="font-family:monospace; font-size:11px; color:#8B92A5;">
+    <div class="pyro-card" style="border:1px dashed rgba(229,62,62,0.25); background: rgba(229,62,62,0.03);">
+      <div style="font-family:monospace; font-size:11px; color:#4B5563;">
         Drag & drop an image or video below. Supported: JPG/PNG/MP4/AVI/MOV
       </div>
     </div>
@@ -151,10 +151,10 @@ def main() -> None:
             st.markdown(
                 f"""
             <div class="pyro-card alert">
-              <div style="font-family:monospace; font-size:10px; color:#555C70; text-transform:uppercase; letter-spacing:0.12em;">
+              <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em;">
                 AI INCIDENT REPORT
               </div>
-              <div style="font-family:monospace; font-size:12px; color:#8B92A5; margin-top:10px; line-height:1.7;">
+              <div style="font-family:monospace; font-size:12px; color:#4B5563; margin-top:10px; line-height:1.7;">
                 {llm}
               </div>
             </div>
@@ -229,7 +229,7 @@ def main() -> None:
         return
 
     # Video path: quick processing preview
-    st.markdown("<div class='pyro-card'><div style='font-family:monospace; color:#8B92A5;'>Video uploaded. Use Live Detection → UPLOAD VIDEO for real-time processing.</div></div>", unsafe_allow_html=True)
+    st.markdown("<div class='pyro-card'><div style='font-family:monospace; color:#4B5563;'>Video uploaded. Use Live Detection → UPLOAD VIDEO for real-time processing.</div></div>", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":

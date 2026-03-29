@@ -54,11 +54,11 @@ def main() -> None:
 
     st.markdown(
         """
-    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#E8EAF0; font-weight:700;">
+    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
         SETTINGS
       </div>
-      <div style="font-family:monospace; font-size:11px; color:#555C70; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
+      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
         Detection engine, alerts, risk scoring, and system controls
       </div>
     </div>
