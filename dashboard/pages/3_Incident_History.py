@@ -47,16 +47,10 @@ def main() -> None:
     _load_css()
 
     st.markdown(
-        """
-    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
-        INCIDENT HISTORY
-      </div>
-      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
-        Timeline, risk index, and operational reporting
-      </div>
-    </div>
-    """,
+        '<div style="padding:0 0 18px;border-bottom:1px solid rgba(0,0,0,0.06);margin-bottom:18px;">'
+        '<div style="font-family:JetBrains Mono,monospace;font-size:22px;color:#111827;font-weight:700;">INCIDENT HISTORY</div>'
+        '<div style="font-family:monospace;font-size:11px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;">Timeline, risk index, and operational reporting</div>'
+        '</div>',
         unsafe_allow_html=True,
     )
 
@@ -199,19 +193,14 @@ def main() -> None:
                     st.image(str(hp))
             if a3.button("Generate Report", key=f"gr_{r['ID']}"):
                 st.markdown(
-                    f"""
-                <div class="pyro-card alert">
-                  <div style="font-family:monospace; font-size:12px; color:#111827; font-weight:700;">Incident Report</div>
-                  <div style="font-family:monospace; font-size:11px; color:#4B5563; margin-top:8px; line-height:1.7;">
-                    ID: {r['ID']}<br/>
-                    Time: {r['Time']}<br/>
-                    Type: {r['Type']} ({r['Confidence']*100:.0f}%)<br/>
-                    Risk: {r['Risk']:.0f}/100<br/>
-                    Location: {r['Location']}<br/><br/>
-                    {r.get('LLM Summary','')}
-                  </div>
-                </div>
-                """,
+                    f'<div class="pyro-card alert">'
+                    f'<div style="font-family:monospace;font-size:12px;color:#111827;font-weight:700;">Incident Report</div>'
+                    f'<div style="font-family:monospace;font-size:11px;color:#4B5563;margin-top:8px;line-height:1.7;">'
+                    f'ID: {r["ID"]}<br/>Time: {r["Time"]}<br/>'
+                    f'Type: {r["Type"]} ({r["Confidence"]*100:.0f}%)<br/>'
+                    f'Risk: {r["Risk"]:.0f}/100<br/>'
+                    f'Location: {r["Location"]}<br/><br/>'
+                    f'{r.get("LLM Summary", "")}</div></div>',
                     unsafe_allow_html=True,
                 )
 

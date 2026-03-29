@@ -106,39 +106,24 @@ st.markdown(
 # Sidebar — brand + navigation
 with st.sidebar:
     st.markdown(
-        """
-    <div style="padding: 20px 0 24px; border-bottom: 1px solid #E5E7EB;">
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div style="width:32px; height:32px; background:linear-gradient(135deg,#E53E3E,#F97316);
-                    border-radius:8px; display:flex; align-items:center; justify-content:center;
-                    font-size:16px; box-shadow:0 2px 6px rgba(229,62,62,0.25);">&#x1F6E1;</div>
-        <div>
-          <div style="font-family:'Inter',sans-serif; font-size:16px; font-weight:700; color:#111827;">
-            IntelliGuard
-          </div>
-          <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em;">
-            Fire Detection
-          </div>
-        </div>
-      </div>
-    </div>
-    """,
+        '<div style="padding:20px 0 24px;border-bottom:1px solid #E5E7EB;">'
+        '<div style="display:flex;align-items:center;gap:10px;">'
+        '<div style="width:32px;height:32px;background:linear-gradient(135deg,#E53E3E,#F97316);'
+        'border-radius:8px;display:flex;align-items:center;justify-content:center;'
+        'font-size:16px;box-shadow:0 2px 6px rgba(229,62,62,0.25);">&#x1F6E1;</div>'
+        '<div>'
+        '<div style="font-family:Inter,sans-serif;font-size:16px;font-weight:700;color:#111827;">IntelliGuard</div>'
+        '<div style="font-family:Inter,sans-serif;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.1em;">Fire Detection</div>'
+        '</div></div></div>',
         unsafe_allow_html=True,
     )
 
     st.markdown(
-        """
-    <div style="padding: 14px 0; border-bottom: 1px solid #E5E7EB;">
-      <div style="display:flex; align-items:center; gap:8px;
-                  font-family:'Inter',sans-serif; font-size:12px; color:#10B981; font-weight:500;">
-        <span class="status-dot active"></span>
-        System Operational
-      </div>
-      <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#9CA3AF; margin-top:4px;">
-        MODEL: YOLOv8s-FireSmoke v1.2
-      </div>
-    </div>
-    """,
+        '<div style="padding:14px 0;border-bottom:1px solid #E5E7EB;">'
+        '<div style="display:flex;align-items:center;gap:8px;font-family:Inter,sans-serif;font-size:12px;color:#10B981;font-weight:500;">'
+        '<span class="status-dot active"></span>System Operational</div>'
+        '<div style="font-family:JetBrains Mono,monospace;font-size:10px;color:#9CA3AF;margin-top:4px;">MODEL: YOLOv8s-FireSmoke v1.2</div>'
+        '</div>',
         unsafe_allow_html=True,
     )
 
@@ -149,30 +134,17 @@ with st.sidebar:
         stats = {"total": 0, "fire": 0, "smoke": 0, "alerts_sent": 0}
 
     st.markdown(
-        f"""
-    <div style="padding: 14px 0; border-bottom: 1px solid #E5E7EB;">
-      <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF;
-                  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; font-weight:600;">
-        Today's Summary
-      </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-        <div style="text-align:center; padding:10px 8px; background:#FEF2F2;
-                    border-radius:10px; border:1px solid #FECACA;">
-          <div style="font-family:'JetBrains Mono',monospace; font-size:20px; color:#DC2626; font-weight:700;">
-            {stats['fire']}
-          </div>
-          <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF; font-weight:500;">FIRE</div>
-        </div>
-        <div style="text-align:center; padding:10px 8px; background:#F3F4F6;
-                    border-radius:10px; border:1px solid #E5E7EB;">
-          <div style="font-family:'JetBrains Mono',monospace; font-size:20px; color:#6B7280; font-weight:700;">
-            {stats['smoke']}
-          </div>
-          <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF; font-weight:500;">SMOKE</div>
-        </div>
-      </div>
-    </div>
-    """,
+        f'<div style="padding:14px 0;border-bottom:1px solid #E5E7EB;">'
+        f'<div style="font-family:Inter,sans-serif;font-size:10px;color:#9CA3AF;'
+        f'text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;font-weight:600;">Today\'s Summary</div>'
+        f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+        f'<div style="text-align:center;padding:10px 8px;background:#FEF2F2;border-radius:10px;border:1px solid #FECACA;">'
+        f'<div style="font-family:JetBrains Mono,monospace;font-size:20px;color:#DC2626;font-weight:700;">{stats["fire"]}</div>'
+        f'<div style="font-family:Inter,sans-serif;font-size:10px;color:#9CA3AF;font-weight:500;">FIRE</div></div>'
+        f'<div style="text-align:center;padding:10px 8px;background:#F3F4F6;border-radius:10px;border:1px solid #E5E7EB;">'
+        f'<div style="font-family:JetBrains Mono,monospace;font-size:20px;color:#6B7280;font-weight:700;">{stats["smoke"]}</div>'
+        f'<div style="font-family:Inter,sans-serif;font-size:10px;color:#9CA3AF;font-weight:500;">SMOKE</div></div>'
+        f'</div></div>',
         unsafe_allow_html=True,
     )
 
@@ -188,24 +160,21 @@ with st.sidebar:
         color = "#10B981" if enabled else "#D1D5DB"
         bg = "#D1FAE5" if enabled else "#F3F4F6"
         label = "ON" if enabled else "OFF"
-        channel_html += f"""
-        <div style="display:flex; justify-content:space-between; align-items:center;
-                    padding:6px 0; font-family:'Inter',sans-serif; font-size:12px;">
-          <span style="color:#4B5563;">{name}</span>
-          <span style="background:{bg}; color:{color}; font-size:10px; font-weight:600;
-                       padding:2px 8px; border-radius:10px;">{label}</span>
-        </div>
-      """
+        channel_html += (
+            f'<div style="display:flex;justify-content:space-between;align-items:center;'
+            f'padding:6px 0;font-family:Inter,sans-serif;font-size:12px;">'
+            f'<span style="color:#4B5563;">{name}</span>'
+            f'<span style="background:{bg};color:{color};font-size:10px;font-weight:600;'
+            f'padding:2px 8px;border-radius:10px;">{label}</span>'
+            f'</div>'
+        )
     st.markdown(
-        f"""
-    <div style="padding: 14px 0;">
-      <div style="font-family:'Inter',sans-serif; font-size:10px; color:#9CA3AF;
-                  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; font-weight:600;">
-        Alert Channels
-      </div>
-      {channel_html}
-    </div>
-    """,
+        f'<div style="padding:14px 0;">'
+        f'<div style="font-family:Inter,sans-serif;font-size:10px;color:#9CA3AF;'
+        f'text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:600;">'
+        f'Alert Channels</div>'
+        f'{channel_html}'
+        f'</div>',
         unsafe_allow_html=True,
     )
 

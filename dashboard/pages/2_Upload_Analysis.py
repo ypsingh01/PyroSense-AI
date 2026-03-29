@@ -77,27 +77,17 @@ def main() -> None:
     _load_css()
 
     st.markdown(
-        """
-    <div style="padding: 0 0 24px; border-bottom: 1px solid #E5E7EB; margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
-        UPLOAD ANALYSIS
-      </div>
-      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
-        Analyze images and videos for fire and smoke
-      </div>
-    </div>
-    """,
+        '<div style="padding:0 0 24px;border-bottom:1px solid #E5E7EB;margin-bottom:18px;">'
+        '<div style="font-family:JetBrains Mono,monospace;font-size:22px;color:#111827;font-weight:700;">UPLOAD ANALYSIS</div>'
+        '<div style="font-family:monospace;font-size:11px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;">Analyze images and videos for fire and smoke</div>'
+        '</div>',
         unsafe_allow_html=True,
     )
 
     st.markdown(
-        """
-    <div class="pyro-card" style="border:1px dashed rgba(229,62,62,0.25); background: rgba(229,62,62,0.03);">
-      <div style="font-family:monospace; font-size:11px; color:#4B5563;">
-        Drag & drop an image or video below. Supported: JPG/PNG/MP4/AVI/MOV
-      </div>
-    </div>
-    """,
+        '<div class="pyro-card" style="border:1px dashed rgba(229,62,62,0.25);background:rgba(229,62,62,0.03);">'
+        '<div style="font-family:monospace;font-size:11px;color:#4B5563;">Drag &amp; drop an image or video below. Supported: JPG/PNG/MP4/AVI/MOV</div>'
+        '</div>',
         unsafe_allow_html=True,
     )
 
@@ -149,16 +139,10 @@ def main() -> None:
             st.image(three, channels="BGR")
         with tabs[2]:
             st.markdown(
-                f"""
-            <div class="pyro-card alert">
-              <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em;">
-                AI INCIDENT REPORT
-              </div>
-              <div style="font-family:monospace; font-size:12px; color:#4B5563; margin-top:10px; line-height:1.7;">
-                {llm}
-              </div>
-            </div>
-            """,
+                f'<div class="pyro-card alert">'
+                f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.12em;">AI INCIDENT REPORT</div>'
+                f'<div style="font-family:monospace;font-size:12px;color:#4B5563;margin-top:10px;line-height:1.7;">{llm}</div>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
 

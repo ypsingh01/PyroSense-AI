@@ -95,28 +95,15 @@ def main() -> None:
     _load_css()
 
     st.markdown(
-        """
-    <div style="display:flex; align-items:center; justify-content:space-between; 
-                padding: 0 0 24px; border-bottom: 1px solid #E5E7EB;">
-      <div>
-        <h1 style="font-family:'JetBrains Mono',monospace; font-size:22px; 
-                   color:#111827; margin:0; font-weight:600;">
-          LIVE DETECTION FEED
-        </h1>
-        <p style="font-family:monospace; font-size:11px; color:#9CA3AF; 
-                  margin:4px 0 0; text-transform:uppercase; letter-spacing:0.1em;">
-          Real-time fire & smoke monitoring
-        </p>
-      </div>
-      <div id="live-indicator" style="display:flex; align-items:center; gap:8px;
-           padding: 8px 16px; background:rgba(16,185,129,0.1); 
-           border:1px solid rgba(16,185,129,0.3); border-radius:20px;">
-        <span class="status-dot active"></span>
-        <span style="font-family:monospace; font-size:12px; color:#10B981; 
-                     font-weight:600; text-transform:uppercase;">MONITORING</span>
-      </div>
-    </div>
-    """,
+        '<div style="display:flex;align-items:center;justify-content:space-between;padding:0 0 24px;border-bottom:1px solid #E5E7EB;">'
+        '<div>'
+        '<h1 style="font-family:JetBrains Mono,monospace;font-size:22px;color:#111827;margin:0;font-weight:600;">LIVE DETECTION FEED</h1>'
+        '<p style="font-family:monospace;font-size:11px;color:#9CA3AF;margin:4px 0 0;text-transform:uppercase;letter-spacing:0.1em;">Real-time fire &amp; smoke monitoring</p>'
+        '</div>'
+        '<div id="live-indicator" style="display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:20px;">'
+        '<span class="status-dot active"></span>'
+        '<span style="font-family:monospace;font-size:12px;color:#10B981;font-weight:600;text-transform:uppercase;">MONITORING</span>'
+        '</div></div>',
         unsafe_allow_html=True,
     )
 
@@ -203,24 +190,16 @@ def main() -> None:
         risk_score = float(risk.get("score", 0.0))
         label, color = _risk_label(risk_score)
 
+        risk_cls = 'critical' if risk_score >= 90 else 'high' if risk_score >= 70 else 'medium' if risk_score >= 40 else 'low'
+        card_cls = 'pyro-card alert' if label in ['HIGH', 'CRITICAL'] else 'pyro-card'
         risk_card.markdown(
-            f"""
-        <div class="pyro-card {'alert' if label in ['HIGH','CRITICAL'] else ''}">
-          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em;">
-            RISK LEVEL
-          </div>
-          <div style="font-family:monospace; font-size:28px; color:{color}; font-weight:800; margin-top:6px;">
-            {label}
-          </div>
-          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; margin-top:2px;">
-            SCORE: {int(risk_score)}/100
-          </div>
-          <div class="risk-bar" style="margin-top:10px;">
-            <div class="risk-fill {'critical' if risk_score>=90 else 'high' if risk_score>=70 else 'medium' if risk_score>=40 else 'low'}"
-                 style="width:{min(100.0, max(0.0, risk_score))}%;"></div>
-          </div>
-        </div>
-        """,
+            f'<div class="{card_cls}">'
+            f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.12em;">RISK LEVEL</div>'
+            f'<div style="font-family:monospace;font-size:28px;color:{color};font-weight:800;margin-top:6px;">{label}</div>'
+            f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;margin-top:2px;">SCORE: {int(risk_score)}/100</div>'
+            f'<div class="risk-bar" style="margin-top:10px;">'
+            f'<div class="risk-fill {risk_cls}" style="width:{min(100.0, max(0.0, risk_score))}%;"></div>'
+            f'</div></div>',
             unsafe_allow_html=True,
         )
 
@@ -239,46 +218,39 @@ def main() -> None:
             bg = "rgba(229,62,62,0.06)" if "fire" in cls else "rgba(75,85,99,0.06)"
             border = "rgba(229,62,62,0.2)" if "fire" in cls else "#E5E7EB"
             badge_cls = "fire" if "fire" in cls else ("smoke" if "smoke" in cls else "safe")
-            log_html += f"""
-            <div style="display:flex; justify-content:space-between; align-items:center;
-                        padding:10px 12px; margin-bottom:8px; background:{bg};
-                        border:1px solid {border}; border-radius:10px;">
-              <div style="display:flex; align-items:center; gap:10px;">
-                <span style="font-family:monospace; font-size:10px; color:#9CA3AF;">{r.get('timestamp','').replace('T',' ')[5:19]}</span>
-                <span class="detection-badge {badge_cls}">{str(r.get('class_name','')).upper()}</span>
-              </div>
-              <div style="font-family:monospace; font-size:11px; color:#4B5563;">
-                {float(r.get('confidence',0))*100:.0f}% • RISK {float(r.get('risk_score',0)):.0f}
-              </div>
-            </div>
-            """
+            ts_display = r.get('timestamp', '').replace('T', ' ')[5:19]
+            conf_pct = float(r.get('confidence', 0)) * 100
+            risk_val = float(r.get('risk_score', 0))
+            log_html += (
+                f'<div style="display:flex;justify-content:space-between;align-items:center;'
+                f'padding:10px 12px;margin-bottom:8px;background:{bg};'
+                f'border:1px solid {border};border-radius:10px;">'
+                f'<div style="display:flex;align-items:center;gap:10px;">'
+                f'<span style="font-family:monospace;font-size:10px;color:#9CA3AF;">{ts_display}</span>'
+                f'<span class="detection-badge {badge_cls}">{str(r.get("class_name", "")).upper()}</span>'
+                f'</div>'
+                f'<div style="font-family:monospace;font-size:11px;color:#4B5563;">'
+                f'{conf_pct:.0f}% &bull; RISK {risk_val:.0f}</div></div>'
+            )
 
+        empty_msg = '<div style="font-family:monospace;color:#9CA3AF;font-size:11px;">No detections yet.</div>'
         log_box.markdown(
-            f"""
-        <div class="pyro-card">
-          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">
-            DETECTION LOG (LAST 10)
-          </div>
-          <div style="max-height:320px; overflow:auto;">{log_html or '<div style="font-family:monospace; color:#9CA3AF; font-size:11px;">No detections yet.</div>'}</div>
-        </div>
-        """,
+            f'<div class="pyro-card">'
+            f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">DETECTION LOG (LAST 10)</div>'
+            f'<div style="max-height:320px;overflow:auto;">{log_html or empty_msg}</div>'
+            f'</div>',
             unsafe_allow_html=True,
         )
 
         la = st.session_state.last_alert
         alerts_box.markdown(
-            f"""
-        <div class="pyro-card">
-          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">
-            ACTIVE ALERTS
-          </div>
-          <div style="font-family:monospace; font-size:11px; color:#4B5563; line-height:1.7;">
-            LAST: {la.get('sent_at','-')}<br/>
-            CHANNEL: {la.get('channel','-')}<br/>
-            STATUS: {la.get('status','-')}
-          </div>
-        </div>
-        """,
+            f'<div class="pyro-card">'
+            f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">ACTIVE ALERTS</div>'
+            f'<div style="font-family:monospace;font-size:11px;color:#4B5563;line-height:1.7;">'
+            f'LAST: {la.get("sent_at", "-")}<br/>'
+            f'CHANNEL: {la.get("channel", "-")}<br/>'
+            f'STATUS: {la.get("status", "-")}'
+            f'</div></div>',
             unsafe_allow_html=True,
         )
 
@@ -513,27 +485,17 @@ def main() -> None:
                             fire_conf = max(fire_conf, float(d.get("score", 0.0)))
 
                     if fire_conf > 0.7:
+                        alert_ts = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
                         alert_banner.markdown(
-                            f"""
-                        <div style="background:#FEF2F2; border:2px solid #E53E3E;
-                                    border-radius:12px; padding:16px 24px; margin:16px 0;
-                                    animation: pulse-border 1s infinite;
-                                    display:flex; align-items:center; justify-content:space-between;">
-                          <div style="display:flex; align-items:center; gap:12px;">
-                            <span style="font-size:24px;">🔥</span>
-                            <div>
-                              <div style="font-family:monospace; font-size:16px; color:#E53E3E; 
-                                          font-weight:700; text-transform:uppercase;">FIRE DETECTED</div>
-                              <div style="font-family:monospace; font-size:12px; color:#4B5563;">
-                                Confidence: {fire_conf*100:.0f}% — Zone: local — {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
-                              </div>
-                            </div>
-                          </div>
-                          <div style="font-family:monospace; font-size:11px; color:#10B981;">
-                            ✓ ALERTS DISPATCHED
-                          </div>
-                        </div>
-                        """,
+                            f'<div style="background:#FEF2F2;border:2px solid #E53E3E;border-radius:12px;padding:16px 24px;margin:16px 0;animation:pulse-border 1s infinite;display:flex;align-items:center;justify-content:space-between;">'
+                            f'<div style="display:flex;align-items:center;gap:12px;">'
+                            f'<span style="font-size:24px;">&#x1F525;</span>'
+                            f'<div>'
+                            f'<div style="font-family:monospace;font-size:16px;color:#E53E3E;font-weight:700;text-transform:uppercase;">FIRE DETECTED</div>'
+                            f'<div style="font-family:monospace;font-size:12px;color:#4B5563;">Confidence: {fire_conf*100:.0f}% &mdash; Zone: local &mdash; {alert_ts}</div>'
+                            f'</div></div>'
+                            f'<div style="font-family:monospace;font-size:11px;color:#10B981;">&#x2713; ALERTS DISPATCHED</div>'
+                            f'</div>',
                             unsafe_allow_html=True,
                         )
                     else:

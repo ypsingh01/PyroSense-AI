@@ -18,16 +18,11 @@ def render_metrics_panel(fps, detections, confidence, inference_ms):
     for col, (label, value, sub) in zip(cols, metrics):
         with col:
             st.markdown(
-                f"""
-        <div style="background:#FFFFFF; border:1px solid rgba(0,0,0,0.06); 
-                    border-radius:12px; padding:16px; text-align:center;">
-          <div style="font-family:monospace; font-size:10px; color:#9CA3AF; 
-                      text-transform:uppercase; letter-spacing:0.1em;">{label}</div>
-          <div style="font-family:monospace; font-size:24px; color:#111827; 
-                      font-weight:700; margin:4px 0;">{value}</div>
-          <div style="font-family:monospace; font-size:10px; color:#9CA3AF;">{sub}</div>
-        </div>
-        """,
+                f'<div style="background:#FFFFFF;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:16px;text-align:center;">'
+                f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.1em;">{label}</div>'
+                f'<div style="font-family:monospace;font-size:24px;color:#111827;font-weight:700;margin:4px 0;">{value}</div>'
+                f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;">{sub}</div>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
 

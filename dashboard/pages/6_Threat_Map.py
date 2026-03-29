@@ -98,16 +98,10 @@ setInterval(() => {
     )
 
     st.markdown(
-        """
-    <div style="padding: 0 0 18px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:22px; color:#111827; font-weight:700;">
-        THREAT MAP
-      </div>
-      <div style="font-family:monospace; font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.1em; margin-top:6px;">
-        Zone-based risk overview (auto-refresh 10s)
-      </div>
-    </div>
-    """,
+        '<div style="padding:0 0 18px;border-bottom:1px solid rgba(0,0,0,0.06);margin-bottom:18px;">'
+        '<div style="font-family:JetBrains Mono,monospace;font-size:22px;color:#111827;font-weight:700;">THREAT MAP</div>'
+        '<div style="font-family:monospace;font-size:11px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;">Zone-based risk overview (auto-refresh 10s)</div>'
+        '</div>',
         unsafe_allow_html=True,
     )
 
@@ -138,19 +132,15 @@ setInterval(() => {
             border = "#E53E3E"
         with grid_cols[i % 4]:
             st.markdown(
-                f"""
-            <div class="pyro-card" style="border:1px solid rgba(0,0,0,0.06); border-left:3px solid {border};">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="font-family:monospace; font-size:12px; color:#111827; font-weight:700;">{z.get('name')}</div>
-                <div style="font-family:monospace; font-size:10px; color:#9CA3AF;">{z.get('camera_id')}</div>
-              </div>
-              <div style="margin-top:10px; font-family:monospace; font-size:10px; color:#4B5563;">
-                STATUS: <b>{s['status']}</b><br/>
-                RISK: <b>{float(s['risk']):.0f}</b><br/>
-                LAST: {str(s['time'])[-19:]}
-              </div>
-            </div>
-            """,
+                f'<div class="pyro-card" style="border:1px solid rgba(0,0,0,0.06);border-left:3px solid {border};">'
+                f'<div style="display:flex;justify-content:space-between;align-items:center;">'
+                f'<div style="font-family:monospace;font-size:12px;color:#111827;font-weight:700;">{z.get("name")}</div>'
+                f'<div style="font-family:monospace;font-size:10px;color:#9CA3AF;">{z.get("camera_id")}</div>'
+                f'</div>'
+                f'<div style="margin-top:10px;font-family:monospace;font-size:10px;color:#4B5563;">'
+                f'STATUS: <b>{s["status"]}</b><br/>'
+                f'RISK: <b>{float(s["risk"]):.0f}</b><br/>'
+                f'LAST: {str(s["time"])[-19:]}</div></div>',
                 unsafe_allow_html=True,
             )
             if st.button("Details", key=f"zd_{i}"):
@@ -162,20 +152,14 @@ setInterval(() => {
         z = detail["zone"]
         s = detail["status"]
         st.markdown(
-            f"""
-        <div class="pyro-card alert">
-          <div style="font-family:monospace; font-size:12px; color:#111827; font-weight:800;">
-            {z.get('name')} — DETAIL
-          </div>
-          <div style="font-family:monospace; font-size:11px; color:#4B5563; margin-top:10px; line-height:1.7;">
-            Camera: {z.get('camera_id')}<br/>
-            Source: {z.get('source')}<br/>
-            Status: {s.get('status')}<br/>
-            Risk: {float(s.get('risk',0)):.0f}/100<br/>
-            Last event: {s.get('time')}
-          </div>
-        </div>
-        """,
+            f'<div class="pyro-card alert">'
+            f'<div style="font-family:monospace;font-size:12px;color:#111827;font-weight:800;">{z.get("name")} &mdash; DETAIL</div>'
+            f'<div style="font-family:monospace;font-size:11px;color:#4B5563;margin-top:10px;line-height:1.7;">'
+            f'Camera: {z.get("camera_id")}<br/>'
+            f'Source: {z.get("source")}<br/>'
+            f'Status: {s.get("status")}<br/>'
+            f'Risk: {float(s.get("risk", 0)):.0f}/100<br/>'
+            f'Last event: {s.get("time")}</div></div>',
             unsafe_allow_html=True,
         )
 
